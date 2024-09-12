@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/styles/home.css') }}">
+    <title>Mental Health</title>
+</head>
+
+<body>
+    <!-- Canvas -->
+    <canvas class="orb-canvas"></canvas>
+    <!-- Overlay -->
+    <div class="overlay">
+        <!-- Overlay inner wrapper -->
+        <div class="overlay__inner">
+            <!-- Title -->
+            <h1 class="overlay__title">
+                One place to know about your mental well-being!
+            </h1>
+            <!-- Description -->
+            <p class="overlay__description">
+                Your mental health is an important part of your well-being. This aspect of your welfare determines how
+                you’re able to operate psychologically, emotionally, and socially among others.
+                Considering how much of a role your mental health plays in each aspect of your life, it's important to
+                guard and improve psychological wellness using appropriate measures.
+            </p>
+            <!-- Buttons -->
+            <!-- <div class="overlay__btns">
+                <form action="{{ url_for('predict') }}" method="POST" id="mental-health-form">
+                    <button class="overlay__btn overlay__btn--colors" type="submit">
+                        <b>Predict your Mental Health 🧠</b>
+                    </button>
+                </form>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="form" id="form">
+        <section class="impform">
+            <h2 class="titles">Mental Health Predictor</h2>
+            <form action="{{ url_for('predict') }}" method="POST" id="mental-health-form">
+                <div class="input-container">
+                    <label for="gender">Gender</label>
+                    <br><br>
+                    <select name="gender" required>
+                        <option disabled selected value>Select</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                        <option value="2">Trans</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="happiness">How often have you felt happy or satisfied with your life in the past month?</label>
+                    <br><br>
+                    <select name="happiness" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="sadness">How often have you felt sad or hopeless in the past month?</label>
+                    <br><br>
+                    <select name="sadness" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="anxiety">How often have you felt nervous, anxious, or on edge in the past month?</label>
+                    <br><br>
+                    <select name="anxiety" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="worrying">How often have you been unable to stop or control worrying in the past month?</label>
+                    <br><br>
+                    <select name="worrying" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="irritability">How often have you felt irritable or easily annoyed in the past month?</label>
+                    <br><br>
+                    <select name="irritability" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="concentration">How often have you had trouble concentrating on things, such as reading the newspaper or watching TV, in the past month?</label>
+                    <br><br>
+                    <select name="concentration" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="fatigue">How often have you felt tired or had little energy in the past month?</label>
+                    <br><br>
+                    <select name="fatigue" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="appetite">How often have you had a poor appetite or overeating in the past month?</label>
+                    <br><br>
+                    <select name="appetite" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="self_esteem">How often have you felt bad about yourself — or that you are a failure or have let yourself or your family down — in the past month?</label>
+                    <br><br>
+                    <select name="self_esteem" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="interests">How often have you lost interest or pleasure in doing things in the past month?</label>
+                    <br><br>
+                    <select name="interests" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <label for="social">How often have you avoided social interactions in the past month?</label>
+                    <br><br>
+                    <select name="social" required>
+                        <option disabled selected value>Select</option>
+                        <option value="0">Never</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Sometimes</option>
+                        <option value="3">Often</option>
+                        <option value="4">Always</option>
+                    </select>
+                </div>
+
+                <div class="submit">
+                    <input type="submit" value="Predict" />
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>
